@@ -22,7 +22,7 @@ def home():
         pdf_bytes = pdf_file.read()
 
     # Top title
-    st.write(f"""<div class="title"><strong>Hi! My name is</strong> Abhiram Singuru👋</div>""", unsafe_allow_html=True)
+    st.write(f"""<div class="title"><strong></strong> Abhiram Singuru</div>""", unsafe_allow_html=True)
 
     # Profile image
     st.write(f"""
@@ -40,7 +40,7 @@ def home():
     """, unsafe_allow_html=True)
 
     # Subtitle
-    st.write(f"""<div class="subtitle" style="text-align: center;">Oracle PL/SQL Developer and Software Engineer</div>""", unsafe_allow_html=True)
+    st.write(f"""<div class="subtitle" style="text-align: center;">Oracle PL/SQL Developer</div>""", unsafe_allow_html=True)
 
     # Social Icons
     social_icons_data = {
@@ -65,7 +65,7 @@ def home():
     - 🛠️ Currently working as an **Associate** at Cognizant Technology Solutions, India.
     - ❤️ Passionate about **Cloud Computing (AWS)**, **Database Optimization**, and **Automation**.
     - 📫 How to reach me: abhiramsinguru@gmail.com
-    - 🏠 Based in Visakhapatnam, India.
+    - 🏠 Based in Hyderabad, India.
     """)
 
     st.write("##")
@@ -79,18 +79,6 @@ def home():
     - **Development Tools:** TOAD, VSCode IDE, WinSCP
     - **Version Control:** Git, GitHub
     - **Monitoring & Scheduling Tools:** Autosys, Dynatrace, Splunk
-    """)
-
-    st.write("##")
-
-    # Work Experience section
-    st.subheader("Work Experience")
-    st.write("""
-    - **Associate at Cognizant Technology Solutions, India (Oct 2021 - Present)**
-        - Optimized Oracle PL/SQL procedures and packages for a legacy insurance application.
-        - Resolved critical production issues and performed root cause analysis (RCA).
-        - Collaborated with stakeholders to align solutions with business needs.
-        - Designed automation workflows to reduce manual tasks and improve efficiency.
     """)
 
     st.write("##")
@@ -123,9 +111,6 @@ def home():
     )
 
     st.write("##")
-
-    st.write(f"""<div class="subtitle" style="text-align: center;">⬅️ Check out my Projects in the navigation menu! (Coming soon...)</div>""", unsafe_allow_html=True)
-
 
 if __name__ == "__main__":
     home()
