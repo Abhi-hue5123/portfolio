@@ -1,37 +1,81 @@
 import streamlit as st
+import os
+import json
 
-# Work Experience section
-st.subheader("Work Experience")
+# Page configs (tab title, favicon)
+st.set_page_config(
+    page_title="Abhiram Singuru's Experience",
+    page_icon="💼",
+    layout="wide",
+)
 
-# Associate Role
-st.write("""
-### Associate  
-**Cognizant Technology Solutions, India**  
-*Oct 2021 – Present*
-""")
+def load_portfolio_data():
+    try:
+        with open("portfolio_data.json", "r") as f:
+            return json.load(f)
+    except Exception as e:
+        st.error(f"Error loading portfolio_data.json: {e}")
+        return {}
 
-# Project 1: The Hartford - Case Management Legacy
-st.write("""
-#### Project 1: The Hartford - Case Management Legacy  
-*Oct 2021 – Present*  
-- Analyzed and optimized Oracle PL/SQL procedures, packages, and forms in a legacy insurance application.
-- Developed and updated stored procedures, triggers, and backend scripts to support business processes.
-- Resolved critical production issues, performed RCA, and coordinated permanent fixes with dev teams.
-- Collaborated with stakeholders to create functional specs and align solutions with business needs.
-- Managed month-end data validations and reconciliations to ensure accurate financial reporting.
-- Designed intake forms and led automation efforts to reduce manual tasks and improve efficiency.
-- Attended client calls for status updates, requirement discussions, and solution recommendations.
-- Guided junior team members on production support tasks, RCA writing, and Oracle workflows.
-- Delivered enhancements and bug fixes in Oracle Forms and PL/SQL, improving overall stability.
-""")
+def experience():
+    # Load JSON data
+    data = load_portfolio_data()
+    experience_list = data.get("experience", [])
 
-# Project 2: The Hartford Case Management 2.0
-st.write("""
-#### Project 2: The Hartford Case Management 2.0  
-*Oct 2024 – Present*  
-- Supported a new Java–Angular web app replacing the legacy Oracle Forms system.
-- Analyzed Java microservices and APIs to resolve functional and backend issues.
-- Used Dynatrace and Splunk for log analysis, monitoring, and RCA in production.
-- Coordinated with Java teams for fixes, patch deployments, and business validations.
-- Upskilled in Java, Spring Boot, and microservices for backend support activities.
-""")
+    # Injects the glowing spotlights into the background
+    st.markdown('<div class="glow-spotlight-1"></div><div class="glow-spotlight-2"></div>', unsafe_allow_html=True)
+
+    # CSS styles file
+    if os.path.exists("styles/main.css"):
+        with open("styles/main.css") as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+    # Header / Navigation logotype mockup
+    st.markdown("""
+    <div class="navbar">
+        <a class="navbar-brand" href="/">Abhiram Singuru<span>.</span></a>
+        <div class="navbar-nav">
+            <span style="font-family: monospace; font-size: 11px; text-transform: uppercase; color: #7c5cff; letter-spacing: 0.1em; border: 1px solid rgba(124,92,255,0.3); padding: 4px 10px; border-radius: 6px; background: rgba(124,92,255,0.05);">Experience</span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Build timeline HTML
+    timeline_items_html = ""
+    for item in experience_list:
+        bullets_html = "".join([f"<li>{bullet}</li>" for bullet in item.get("bullet_points", [])])
+        tech_tags_html = "".join([f'<span class="tech-badge">{tag}</span>' for tag in item.get("tech_tags", [])])
+        
+        timeline_items_html += f"""
+        <div class="timeline-item">
+            <div class="timeline-date">{item.get("date", "")}</div>
+            <div class="timeline-title">{item.get("title", "")}</div>
+            <div class="timeline-company">{item.get("company", "")}</div>
+            <div class="timeline-content">
+                <ul>
+                    {bullets_html}
+                </ul>
+                <div style="margin-top: 12px;">
+                    {tech_tags_html}
+                </div>
+            </div>
+        </div>
+        """
+
+    # Render main card with timeline container
+    st.markdown(f"""
+    <div class="glass-card" style="margin-top: 10px;">
+        <span class="section-label">§ 04 — Experience</span>
+        <div class="section-title">Professional Experience</div>
+        <div class="section-desc">
+            A chronological timeline of my engineering roles, key project contributions, and database optimizations at Cognizant Technology Solutions.
+        </div>
+        
+        <div class="timeline-container">
+            {timeline_items_html}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    experience()

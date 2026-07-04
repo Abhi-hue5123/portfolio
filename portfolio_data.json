@@ -1,0 +1,226 @@
+{
+  "personal_info": {
+    "name": "Abhiram Singuru",
+    "title": "Oracle PL/SQL Developer",
+    "status_badge": "Available for opportunities",
+    "location": "Hyderabad, IN",
+    "timezone": "IST · UTC+5:30",
+    "email": "abhiramsinguru@gmail.com",
+    "linkedin": "https://linkedin.com/in/abhiram-singuru11",
+    "github": "https://github.com/Abhi-hue5123",
+    "hero_title": "Abhiram Singuru.",
+    "hero_subtitle": "Associate Software Engineer specializing in database systems, performance tuning, and automation processes. Leveraging Oracle PL/SQL, Unix shell scripting, and Java to deliver high-performing backend infrastructure.",
+    "about_label": "§ 01 — About",
+    "about_title": "Database Engineer & Automator",
+    "about_desc": "I am a backend-focused engineer currently working as an Associate at Cognizant. My expertise revolves around optimizing large-scale databases, scripting automated monitoring checks, and helping enterprise applications migrate to modern web stacks.",
+    "about_bullets": [
+      "Currently supporting <b>The Hartford Case Management</b> platform transition from legacy Oracle Forms to modern Java/Angular services.",
+      "Passionate about AWS Cloud operations, Database optimization (SQL tuning, indexing, explain plan), and Unix cronjob automation.",
+      "Oracle Database SQL Certified Associate and AWS Certified Cloud Practitioner."
+    ]
+  },
+  "stats": [
+    {
+      "number": "4+",
+      "label": "Years Exp"
+    },
+    {
+      "number": "3",
+      "label": "Certifications"
+    },
+    {
+      "number": "10+",
+      "label": "Enterprise Procs"
+    }
+  ],
+  "skills": {
+    "primary": [
+      "Oracle PL/SQL",
+      "SQL Tuning",
+      "Unix Shell Scripting",
+      "Oracle 19c",
+      "Git"
+    ],
+    "secondary": [
+      "Java",
+      "Spring Boot",
+      "AWS Cloud",
+      "TOAD",
+      "Autosys",
+      "Dynatrace",
+      "Splunk",
+      "VS Code"
+    ]
+  },
+  "certifications": [
+    {
+      "title": "Oracle Cloud OCI Generative AI Professional",
+      "dates": "12/2024 - 12/2026"
+    },
+    {
+      "title": "Oracle Database SQL Certified Associate (1Z0-071)",
+      "dates": "02/2025"
+    },
+    {
+      "title": "AWS Certified Cloud Practitioner",
+      "dates": "08/2024 - 08/2027"
+    }
+  ],
+  "experience": [
+    {
+      "date": "Oct 2024 – Present",
+      "title": "The Hartford Case Management 2.0",
+      "company": "Associate · Cognizant Technology Solutions",
+      "bullet_points": [
+        "Supported the transition to a modern Java–Angular web application replacing a legacy Oracle Forms systems.",
+        "Analyzed Java microservices backend logs and REST APIs to debug and resolve data integration issues.",
+        "Utilized Dynatrace APM and Splunk query dashboards to perform real-time monitoring and log-based Root Cause Analysis (RCA).",
+        "Coordinated with core development teams for system hotfixes, patch deployments, and post-release database validation checks.",
+        "Upskilled in Java, Spring Boot, and microservices patterns to bridge the gap between database logic and frontend APIs."
+      ],
+      "tech_tags": ["Java", "Spring Boot", "Angular", "Dynatrace", "Splunk", "REST APIs"]
+    },
+    {
+      "date": "Oct 2021 – Present",
+      "title": "The Hartford - Case Management Legacy",
+      "company": "Associate · Cognizant Technology Solutions",
+      "bullet_points": [
+        "Developed, optimized, and tuned complex Oracle PL/SQL procedures, packages, functions, and database triggers.",
+        "Managed legacy Oracle Forms enhancements and updated Unix shell scripting processes to support daily backend business workflows.",
+        "Investigated and resolved critical production database issues, delivering structural RCA and permanent software patches.",
+        "Collaborated with client business stakeholders to gather requirements, write functional specs, and recommend technical implementations.",
+        "Supervised month-end financial reconciliations and validations to ensure absolute data consistency in reporting systems.",
+        "Automated daily intake operations and processes to decrease manual effort and human error.",
+        "Mentored and guided junior engineers on Oracle workflows, performance tuning methods, and production support guidelines."
+      ],
+      "tech_tags": ["Oracle PL/SQL", "Unix Shell Scripting", "Oracle 19c", "TOAD", "Autosys", "Git & GitHub"]
+    }
+  ],
+  "projects": [
+    {
+      "category": "Database",
+      "title": "PL/SQL Query Profiler & Index Optimizer",
+      "description": "An automated tuning script utility that parses TKPROF files and SQL Trace reports, automatically highlighting queries exceeding response thresholds. Recommends specific index strategies, partition splits, and hint overrides to optimize explain plans.",
+      "tech_tags": ["Oracle PL/SQL", "SQL Tuning", "TKPROF", "Explain Plan"]
+    },
+    {
+      "category": "Automation",
+      "title": "Automated Shell System Reconciler",
+      "description": "A Unix bash-agent utility running on cron/Autosys scheduler that executes cross-database validation checks. Pulls transaction volumes from legacy tables, validates figures against financial staging schemas, and sends automated alert logs to support dashboards on discrepancy.",
+      "tech_tags": ["Unix Bash", "Oracle SQL", "Autosys", "Cron"]
+    },
+    {
+      "category": "Full-Stack",
+      "title": "Case Intake Automation Service",
+      "description": "A backend service designed to process intake requests from web applications. Intercepts structured Angular forms, executes validations via Spring Boot API layers, and persists data into Oracle database tables using transactional triggers.",
+      "tech_tags": ["Java", "Spring Boot", "REST APIs", "Oracle 19c"]
+    },
+    {
+      "category": "AI / Cloud",
+      "title": "OCI Generative AI SQL Companion",
+      "description": "A productivity CLI utility leveraging OCI Generative AI SDK models to generate boilerplate PL/SQL script files. Takes normal language inputs describing tables and desired outputs and drafts optimized stored procedures, exception blocks, and tests.",
+      "tech_tags": ["Python", "OCI GenAI", "LangChain", "PL/SQL Gen"]
+    }
+  ],
+  "writing": [
+    {
+      "category": "Oracle Database · SQL Tuning",
+      "title": "Mastering Explain Plans: Tuning Slow SQL Queries in Oracle 19c",
+      "description": "A deep-dive tutorial explaining how to generate, read, and analyze Oracle Explain Plans. Covers key table scans vs index lookups, identifying join order issues, and implementing SQL hints to force optimal optimizer behavior.",
+      "date": "Published Feb 2025",
+      "link": "#"
+    },
+    {
+      "category": "Automation · Unix Shell",
+      "title": "Automating Production Support: How Unix Shell Scripting Saved Us 5 Hours Weekly",
+      "description": "Walkthrough of a shell agent built to perform automated system health check tasks. Highlights trapping exit statuses, piping database credentials securely, and setting up centralized email logs for support operations.",
+      "date": "Published Nov 2024",
+      "link": "#"
+    },
+    {
+      "category": "Cloud · AWS RDS",
+      "title": "Transitioning to Cloud: An Oracle Developer's Guide to AWS CCP",
+      "description": "My journey preparing for and passing the AWS Certified Cloud Practitioner exam. Examines the conceptual differences between hosting on-prem Oracle DB clusters vs launching AWS RDS instances and VPC isolation.",
+      "date": "Published Sep 2024",
+      "link": "#"
+    }
+  ],
+  "uses": [
+    {
+      "category": "Development Editors & Clients",
+      "items": [
+        "<b>TOAD (Tool for Oracle Application Developers):</b> My primary client for writing PL/SQL packages, running explain plans, and managing Oracle database schemas.",
+        "<b>VS Code (Visual Studio Code):</b> For writing shell scripts, python helper files, and Java backend classes. Loaded with GitLens and SQL formatter extensions.",
+        "<b>WinSCP / Cyberduck:</b> Essential clients for transferring scripts, log files, and automation triggers to Unix staging/production support environments."
+      ]
+    },
+    {
+      "category": "Environment & Databases",
+      "items": [
+        "<b>Database Schema:</b> Oracle 19c Database systems, hosting transactional tables and complex data partitions.",
+        "<b>Shell & Scripting:</b> Unix Shell (KornShell / Bash) with native cron daemons for batch-scheduling automation.",
+        "<b>Scheduling:</b> CA Autosys Workload Automation to coordinate file processing and database procedure timelines."
+      ]
+    },
+    {
+      "category": "Monitoring & Cloud Services",
+      "items": [
+        "<b>AWS Cloud Services:</b> Working with RDS (Relational Database Service), EC2 instances, and IAM configuration roles.",
+        "<b>Logs & Analytics:</b> Splunk query syntax for looking up server error outputs, tracking Java transaction speeds.",
+        "<b>Performance Monitoring:</b> Dynatrace APM dashboarding to monitor host metrics, heap sizes, and API request latency spikes."
+      ]
+    },
+    {
+      "category": "Hardware & OS",
+      "items": [
+        "<b>Machine:</b> MacBook Air (M-Series) — compact, quiet, and powerful enough for database modeling and local scripting.",
+        "<b>Operating System:</b> macOS (with Zsh configuration shell).",
+        "<b>Terminal:</b> Warp Terminal (GPU-accelerated shell with integrated AI command suggestions)."
+      ]
+    }
+  ],
+  "archive": [
+    {
+      "year": 2024,
+      "project": "The Hartford Case Management 2.0",
+      "company": "Cognizant Technology Solutions",
+      "tech_tags": ["Java", "Spring Boot", "Angular", "Dynatrace", "Splunk"]
+    },
+    {
+      "year": 2024,
+      "project": "OCI Generative AI SQL Companion",
+      "company": "Personal Project",
+      "tech_tags": ["Python", "OCI GenAI", "LangChain", "SDK Integration"]
+    },
+    {
+      "year": 2024,
+      "project": "Automated Shell System Reconciler",
+      "company": "Cognizant Technology Solutions",
+      "tech_tags": ["Unix Bash", "Oracle SQL", "Autosys", "Cron"]
+    },
+    {
+      "year": 2023,
+      "project": "Case Intake Automation Engine",
+      "company": "Cognizant Technology Solutions",
+      "tech_tags": ["Java", "Spring Boot", "Oracle Database"]
+    },
+    {
+      "year": 2022,
+      "project": "The Hartford Case Management Legacy",
+      "company": "Cognizant Technology Solutions",
+      "tech_tags": ["Oracle PL/SQL", "SQL Tuning", "Unix Shell Scripts", "TOAD"]
+    },
+    {
+      "year": 2022,
+      "project": "PL/SQL Query Profiler & Optimizer",
+      "company": "Personal Project",
+      "tech_tags": ["Oracle PL/SQL", "Explain Plan", "Query Tuning"]
+    },
+    {
+      "year": 2021,
+      "project": "Client Intake Forms & Enhancements",
+      "company": "Cognizant Technology Solutions",
+      "tech_tags": ["Oracle Forms", "PL/SQL", "Triggers"]
+    }
+  ]
+}
