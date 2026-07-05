@@ -14,7 +14,7 @@
     "about_title": "Database Engineer & Automator",
     "about_desc": "I am a backend-focused engineer currently working as an Associate at Cognizant. My expertise revolves around optimizing large-scale databases, scripting automated monitoring checks, and helping enterprise applications migrate to modern web stacks.",
     "about_bullets": [
-      "Currently supporting <b>The Hartford Case Management</b> platform transition from legacy Oracle Forms to modern Java/Angular services.",
+      "Currently supporting **The Hartford Case Management** platform transition from legacy Oracle Forms to modern Java/Angular services.",
       "Passionate about AWS Cloud operations, Database optimization (SQL tuning, indexing, explain plan), and Unix cronjob automation.",
       "Oracle Database SQL Certified Associate and AWS Certified Cloud Practitioner."
     ]
@@ -149,33 +149,33 @@
     {
       "category": "Development Editors & Clients",
       "items": [
-        "<b>TOAD (Tool for Oracle Application Developers):</b> My primary client for writing PL/SQL packages, running explain plans, and managing Oracle database schemas.",
-        "<b>VS Code (Visual Studio Code):</b> For writing shell scripts, python helper files, and Java backend classes. Loaded with GitLens and SQL formatter extensions.",
-        "<b>WinSCP / Cyberduck:</b> Essential clients for transferring scripts, log files, and automation triggers to Unix staging/production support environments."
+        "**TOAD (Tool for Oracle Application Developers):** My primary client for writing PL/SQL packages, running explain plans, and managing Oracle database schemas.",
+        "**VS Code (Visual Studio Code):** For writing shell scripts, python helper files, and Java backend classes. Loaded with GitLens and SQL formatter extensions.",
+        "**WinSCP / Cyberduck:** Essential clients for transferring scripts, log files, and automation triggers to Unix staging/production support environments."
       ]
     },
     {
       "category": "Environment & Databases",
       "items": [
-        "<b>Database Schema:</b> Oracle 19c Database systems, hosting transactional tables and complex data partitions.",
-        "<b>Shell & Scripting:</b> Unix Shell (KornShell / Bash) with native cron daemons for batch-scheduling automation.",
-        "<b>Scheduling:</b> CA Autosys Workload Automation to coordinate file processing and database procedure timelines."
+        "**Database Schema:** Oracle 19c Database systems, hosting transactional tables and complex data partitions.",
+        "**Shell & Scripting:** Unix Shell (KornShell / Bash) with native cron daemons for batch-scheduling automation.",
+        "**Scheduling:** CA Autosys Workload Automation to coordinate file processing and database procedure timelines."
       ]
     },
     {
       "category": "Monitoring & Cloud Services",
       "items": [
-        "<b>AWS Cloud Services:</b> Working with RDS (Relational Database Service), EC2 instances, and IAM configuration roles.",
-        "<b>Logs & Analytics:</b> Splunk query syntax for looking up server error outputs, tracking Java transaction speeds.",
-        "<b>Performance Monitoring:</b> Dynatrace APM dashboarding to monitor host metrics, heap sizes, and API request latency spikes."
+        "**AWS Cloud Services:** Working with RDS (Relational Database Service), EC2 instances, and IAM configuration roles.",
+        "**Logs & Analytics:** Splunk query syntax for looking up server error outputs, tracking Java transaction speeds.",
+        "**Performance Monitoring:** Dynatrace APM dashboarding to monitor host metrics, heap sizes, and API request latency spikes."
       ]
     },
     {
       "category": "Hardware & OS",
       "items": [
-        "<b>Machine:</b> MacBook Air (M-Series) — compact, quiet, and powerful enough for database modeling and local scripting.",
-        "<b>Operating System:</b> macOS (with Zsh configuration shell).",
-        "<b>Terminal:</b> Warp Terminal (GPU-accelerated shell with integrated AI command suggestions)."
+        "**Machine:** MacBook Air (M-Series) — compact, quiet, and powerful enough for database modeling and local scripting.",
+        "**Operating System:** macOS (with Zsh configuration shell).",
+        "**Terminal:** Warp Terminal (GPU-accelerated shell with integrated AI command suggestions)."
       ]
     }
   ],

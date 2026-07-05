@@ -1,47 +1,36 @@
-"""
-pages/02_Projects.py — Projects Showcase Page
-JSON-driven | Uses shared utils
-"""
+"""Projects page."""
+
+from __future__ import annotations
+
 import streamlit as st
-from utils import inject_css, load_data, page_header, render_tech_badges
+
+from utils import clean_text, inject_css, load_data, page_intro, render_pills
 
 st.set_page_config(
-    page_title="Projects — Abhiram Singuru",
-    page_icon="🛠️",
+    page_title="Projects - Abhiram Singuru",
+    page_icon="Projects",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 inject_css()
-page_header("Projects")
 
-data     = load_data()
+data = load_data()
 projects = data.get("projects", [])
 
-st.markdown("""
-<div class="glass-card" style="margin-bottom:28px;">
-    <span class="section-label">§ 05 — Projects</span>
-    <div class="section-title">Selected Work</div>
-    <div class="section-desc">
-        A curated set of personal and professional projects spanning database engineering,
-        automation pipelines, full-stack services, and AI-assisted tooling.
-    </div>
-</div>
-""", unsafe_allow_html=True)
+page_intro(
+    "05 - Projects",
+    "Selected Work",
+    "A curated set of personal and professional projects spanning database engineering, automation pipelines, full-stack services, and AI-assisted tooling.",
+    key="projects_intro",
+)
 
-# ── Project cards in a CSS grid ───────────────────────────────────────────────
-cards_html = '<div class="project-grid">'
-
-for p in projects:
-    tags = render_tech_badges(p.get("tech_tags", []))
-    cards_html += f"""
-    <div class="project-card">
-        <span class="category-badge">{p.get("category", "")}</span>
-        <div class="project-title">{p.get("title", "")}</div>
-        <div class="project-desc">{p.get("description", "")}</div>
-        <div style="margin-top:auto; padding-top:12px;">{tags}</div>
-    </div>
-    """
-
-cards_html += "</div>"
-st.markdown(cards_html, unsafe_allow_html=True)
+for row_start in range(0, len(projects), 2):
+    cols = st.columns(2, gap="medium")
+    for col_index, project in enumerate(projects[row_start : row_start + 2]):
+        with cols[col_index]:
+            with st.container(key=f"project_card_{row_start + col_index}"):
+                st.caption(project.get("category", ""))
+                st.subheader(project.get("title", ""))
+                st.write(clean_text(project.get("description", "")))
+                render_pills(project.get("tech_tags", []), key=f"project_tags_{row_start + col_index}")

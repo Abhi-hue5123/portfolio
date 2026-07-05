@@ -1,52 +1,43 @@
-"""
-pages/03_Writing.py — Writing & Articles Page
-JSON-driven | Uses shared utils
-"""
+"""Writing page."""
+
+from __future__ import annotations
+
 import streamlit as st
-from utils import inject_css, load_data, page_header
+
+from utils import clean_text, inject_css, load_data, page_intro
 
 st.set_page_config(
-    page_title="Writing — Abhiram Singuru",
-    page_icon="✍️",
+    page_title="Writing - Abhiram Singuru",
+    page_icon="Writing",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 inject_css()
-page_header("Writing")
 
-data    = load_data()
+data = load_data()
 writing = data.get("writing", [])
 
-st.markdown("""
-<div class="glass-card" style="margin-bottom:28px;">
-    <span class="section-label">§ 06 — Writing</span>
-    <div class="section-title">Articles &amp; Tutorials</div>
-    <div class="section-desc">
-        Technical deep-dives, walkthroughs, and guides on Oracle databases,
-        Unix automation, and cloud engineering.
-    </div>
-</div>
-""", unsafe_allow_html=True)
+page_intro(
+    "06 - Writing",
+    "Articles & Tutorials",
+    "Technical deep-dives, walkthroughs, and guides on Oracle databases, Unix automation, and cloud engineering.",
+    key="writing_intro",
+)
 
-# ── Writing cards ──────────────────────────────────────────────────────────────
-for article in writing:
-    link_href = article.get("link", "#")
-    read_link = (
-        f'<a class="read-link" href="{link_href}" target="_blank" rel="noopener">'
-        'Read article →</a>'
-        if link_href and link_href != "#"
-        else '<span class="read-link" style="opacity:0.4; cursor:default;">Coming soon</span>'
-    )
+for index, article in enumerate(writing):
+    with st.container(key=f"writing_card_{index}"):
+        top = st.columns([3, 1], gap="medium")
+        with top[0]:
+            st.caption(article.get("category", ""))
+            st.subheader(article.get("title", ""))
+        with top[1]:
+            st.caption(article.get("date", ""))
 
-    st.markdown(f"""
-    <div class="writing-card">
-        <div style="flex:1;">
-            <span class="category-badge">{article.get("category", "")}</span>
-            <div class="writing-title">{article.get("title", "")}</div>
-            <div class="writing-desc">{article.get("description", "")}</div>
-            {read_link}
-        </div>
-        <div class="writing-date">{article.get("date", "")}</div>
-    </div>
-    """, unsafe_allow_html=True)
+        st.write(clean_text(article.get("description", "")))
+
+        link = article.get("link", "#")
+        if link and link != "#":
+            st.link_button("Read article", link)
+        else:
+            st.caption("Coming soon")

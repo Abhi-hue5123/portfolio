@@ -1,82 +1,90 @@
-"""
-utils.py — Shared utility functions for all portfolio pages.
-Handles JSON loading (cached), CSS injection, and common HTML helpers.
-"""
-import os
+"""Shared helpers for the Streamlit portfolio."""
+
+from __future__ import annotations
+
 import json
-import base64
+import re
+from pathlib import Path
+
 import streamlit as st
 
-# ─── Resolve the project root reliably (works locally AND on Streamlit Cloud) ─
-_HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = Path(__file__).resolve().parent
+DATA_FILE = ROOT_DIR / "portfolio_data.json"
+CSS_FILE = ROOT_DIR / "styles" / "main.css"
+PROFILE_IMAGE = ROOT_DIR / "assets" / "profile_squared.png"
+RESUME_FILE = ROOT_DIR / "assets" / "Abhiram_Singuru_CV.pdf"
 
 
-def _path(*parts: str) -> str:
-    """Return absolute path relative to the project root."""
-    return os.path.join(_HERE, *parts)
-
-
-# ─── Cached JSON loader ───────────────────────────────────────────────────────
 @st.cache_data(show_spinner=False)
 def load_data() -> dict:
-    """Load portfolio_data.json once and cache for the session."""
-    data_path = _path("portfolio_data.json")
+    """Load portfolio data once per session."""
     try:
-        with open(data_path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception as e:
-        st.error(f"⚠️ Could not load portfolio_data.json: {e}")
-        return {}
+        return json.loads(DATA_FILE.read_text(encoding="utf-8"))
+    except OSError as exc:
+        st.error(f"Could not load portfolio_data.json: {exc}")
+    except json.JSONDecodeError as exc:
+        st.error(f"portfolio_data.json is not valid JSON: {exc}")
+    return {}
 
 
-# ─── CSS / HTML Injection ─────────────────────────────────────────────────────
-def inject_css() -> None:
-    """Inject the global CSS stylesheet (styles/main.css) and glow spotlights."""
-    css_path = _path("styles", "main.css")
-    if os.path.exists(css_path):
-        with open(css_path, encoding="utf-8") as f:
-            css = f.read()
-        st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
-    # Glow spotlight divs (fixed/z-index:-1, no pointer-events)
-    st.markdown(
-        '<div class="glow-spotlight-1"></div><div class="glow-spotlight-2"></div>',
-        unsafe_allow_html=True,
-    )
+@st.cache_data(show_spinner=False)
+def load_css() -> str:
+    """Load the production stylesheet."""
+    try:
+        return CSS_FILE.read_text(encoding="utf-8")
+    except OSError as exc:
+        st.error(f"Could not load styles/main.css: {exc}")
+        return ""
 
 
-def page_header(page_label: str) -> None:
-    """Render the branded top navbar with the current page label."""
-    data = load_data()
-    name = data.get("personal_info", {}).get("name", "Portfolio")
-    st.markdown(
-        f"""
-        <div class="navbar">
-            <a class="navbar-brand" href="/">{name}<span>.</span></a>
-            <div class="navbar-nav">
-                <span class="page-badge">{page_label}</span>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-# ─── Asset helpers ────────────────────────────────────────────────────────────
-def file_to_base64(filepath: str) -> str | None:
-    """Return base64-encoded string for a binary file, or None if not found."""
-    full = _path(filepath)
-    if not os.path.exists(full):
+@st.cache_data(show_spinner=False)
+def load_resume_bytes() -> bytes | None:
+    """Load the resume PDF for Streamlit's native download button."""
+    try:
+        return RESUME_FILE.read_bytes()
+    except OSError:
         return None
-    with open(full, "rb") as f:
-        return base64.b64encode(f.read()).decode()
 
 
-# ─── Reusable HTML component builders ────────────────────────────────────────
-def render_tech_badges(tags: list[str]) -> str:
-    """Return HTML for a row of tech-badge spans."""
-    return "".join(f'<span class="tech-badge">{tag}</span>' for tag in tags)
+def inject_css() -> None:
+    """Inject global CSS through Streamlit's HTML API."""
+    css = load_css()
+    if css:
+        st.html(f"<style>{css}</style>")
 
 
-def render_skill_pills(skills: list[str], pill_class: str) -> str:
-    """Return HTML for a group of skill pills."""
-    return "".join(f'<span class="{pill_class}">{s}</span>' for s in skills)
+def page_intro(label: str, title: str, description: str, key: str = "page_intro") -> None:
+    """Render a consistent page introduction with native Streamlit elements."""
+    with st.container(key=key):
+        st.caption(label)
+        st.title(title)
+        st.write(description)
+
+
+def clean_text(value: str) -> str:
+    """Remove legacy HTML tags from data before displaying as text/markdown."""
+    value = re.sub(r"</?b>", "**", value)
+    return re.sub(r"<[^>]+>", "", value)
+
+
+def render_pills(items: list[str], key: str, variant: str = "secondary") -> None:
+    """Render compact Streamlit badges for skills and tech tags."""
+    if not items:
+        return
+
+    with st.container(key=key):
+        cols = st.columns(min(len(items), 4), gap="small")
+        for index, item in enumerate(items):
+            with cols[index % len(cols)]:
+                badge_type = "blue" if variant == "primary" else "gray"
+                st.badge(clean_text(item), color=badge_type)
+
+
+def render_section_card(label: str, title: str, description: str, key: str):
+    """Open a styled container and render the common section header."""
+    card = st.container(key=key)
+    with card:
+        st.caption(label)
+        st.subheader(title)
+        st.write(description)
+    return card

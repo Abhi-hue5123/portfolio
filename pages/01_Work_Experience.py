@@ -1,50 +1,37 @@
-"""
-pages/01_Work_Experience.py — Work Experience Timeline Page
-JSON-driven | Uses shared utils
-"""
+"""Work experience page."""
+
+from __future__ import annotations
+
 import streamlit as st
-from utils import inject_css, load_data, page_header, render_tech_badges
+
+from utils import clean_text, inject_css, load_data, page_intro, render_pills
 
 st.set_page_config(
-    page_title="Work Experience — Abhiram Singuru",
-    page_icon="💼",
+    page_title="Work Experience - Abhiram Singuru",
+    page_icon="Work",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 inject_css()
-page_header("Experience")
 
-data            = load_data()
+data = load_data()
 experience_list = data.get("experience", [])
 
-st.markdown("""
-<div class="glass-card" style="margin-top:10px;">
-    <span class="section-label">§ 04 — Experience</span>
-    <div class="section-title">Professional Experience</div>
-    <div class="section-desc">
-        A chronological timeline of my engineering roles, project contributions, and
-        database optimizations at Cognizant Technology Solutions.
-    </div>
-""", unsafe_allow_html=True)
+page_intro(
+    "04 - Experience",
+    "Professional Experience",
+    "A chronological timeline of my engineering roles, project contributions, and database optimizations at Cognizant Technology Solutions.",
+    key="experience_intro",
+)
 
-# ── Build timeline items ───────────────────────────────────────────────────────
-timeline_html = '<div class="timeline-container">'
+for index, item in enumerate(experience_list):
+    with st.container(key=f"experience_card_{index}"):
+        st.caption(item.get("date", ""))
+        st.subheader(item.get("title", ""))
+        st.write(item.get("company", ""))
 
-for item in experience_list:
-    bullets = "".join(f"<li>{b}</li>" for b in item.get("bullet_points", []))
-    tags    = render_tech_badges(item.get("tech_tags", []))
-    timeline_html += f"""
-    <div class="timeline-item">
-        <div class="timeline-date">{item.get("date", "")}</div>
-        <div class="timeline-title">{item.get("title", "")}</div>
-        <div class="timeline-company">{item.get("company", "")}</div>
-        <div class="timeline-content">
-            <ul>{bullets}</ul>
-            <div style="margin-top:12px;">{tags}</div>
-        </div>
-    </div>
-    """
+        for bullet in item.get("bullet_points", []):
+            st.markdown(f"- {clean_text(bullet)}")
 
-timeline_html += "</div></div>"  # close timeline-container + glass-card
-st.markdown(timeline_html, unsafe_allow_html=True)
+        render_pills(item.get("tech_tags", []), key=f"experience_tags_{index}", variant="primary")

@@ -1,43 +1,32 @@
-"""
-pages/04_Uses.py — Tools & Setup Page
-JSON-driven | Uses shared utils
-"""
+"""Tools and setup page."""
+
+from __future__ import annotations
+
 import streamlit as st
-from utils import inject_css, load_data, page_header
+
+from utils import clean_text, inject_css, load_data, page_intro
 
 st.set_page_config(
-    page_title="Uses — Abhiram Singuru",
-    page_icon="⚙️",
+    page_title="Uses - Abhiram Singuru",
+    page_icon="Uses",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 inject_css()
-page_header("Uses")
 
 data = load_data()
 uses = data.get("uses", [])
 
-st.markdown("""
-<div class="glass-card" style="margin-bottom:28px;">
-    <span class="section-label">§ 07 — Uses</span>
-    <div class="section-title">Tools &amp; Setup</div>
-    <div class="section-desc">
-        Software, hardware, and services powering my daily development
-        and database engineering workflow.
-    </div>
-</div>
-""", unsafe_allow_html=True)
+page_intro(
+    "07 - Uses",
+    "Tools & Setup",
+    "Software, hardware, and services powering my daily development and database engineering workflow.",
+    key="uses_intro",
+)
 
-# ── Render each category as a card ────────────────────────────────────────────
-for category in uses:
-    items_html = "".join(
-        f'<div class="uses-item">{item}</div>'
-        for item in category.get("items", [])
-    )
-    st.markdown(f"""
-    <div class="glass-card">
-        <div class="uses-category-title">{category.get("category", "")}</div>
-        {items_html}
-    </div>
-    """, unsafe_allow_html=True)
+for index, category in enumerate(uses):
+    with st.container(key=f"uses_card_{index}"):
+        st.subheader(category.get("category", ""))
+        for item in category.get("items", []):
+            st.markdown(f"- {clean_text(item)}")
