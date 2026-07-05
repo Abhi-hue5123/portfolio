@@ -1,2 +1,2 @@
-streamlit>=1.29.0
-watchdog>=3.0.0
+streamlit>=1.35.0
+watchdog>=4.0.0
