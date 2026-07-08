@@ -5,16 +5,7 @@ from __future__ import annotations
 import pandas as pd
 import streamlit as st
 
-from utils import clean_text, inject_css, load_data, page_intro
-
-st.set_page_config(
-    page_title="Archive - Abhiram Singuru",
-    page_icon="Archive",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
-
-inject_css()
+from utils import clean_text, load_data, page_intro
 
 data = load_data()
 archive = data.get("archive", [])

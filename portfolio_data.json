@@ -228,6 +228,28 @@
   }
 ],
 
+"education": [
+  {
+    "degree": "Add your degree here (e.g. B.Tech in Computer Science)",
+    "institution": "Add your institution name",
+    "dates": "20XX - 20XX",
+    "description": "Sample placeholder — replace with a short description of relevant coursework, honors, or achievements."
+  }
+],
+"testimonials": [
+  {
+    "quote": "Sample testimonial — replace with a real recommendation from a manager, teammate, or client.",
+    "name": "Add Name",
+    "title": "Their Role",
+    "company": "Their Company"
+  },
+  {
+    "quote": "Sample testimonial — replace with a second real recommendation to build credibility with visitors.",
+    "name": "Add Name",
+    "title": "Their Role",
+    "company": "Their Company"
+  }
+],
 "archive": [
   {
     "year": 2026,

@@ -4,16 +4,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from utils import clean_text, inject_css, load_data, page_intro, render_pills
-
-st.set_page_config(
-    page_title="Work Experience - Abhiram Singuru",
-    page_icon="Work",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
-
-inject_css()
+from utils import clean_text, load_data, page_intro, render_pills
 
 data = load_data()
 experience_list = data.get("experience", [])

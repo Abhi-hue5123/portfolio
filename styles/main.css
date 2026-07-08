@@ -1,41 +1,189 @@
 :root {
-    --portfolio-bg: #0a0d12;
-    --portfolio-panel: rgba(255, 255, 255, 0.055);
-    --portfolio-panel-strong: rgba(255, 255, 255, 0.085);
+    --portfolio-bg: #0a0a0b;
+    --portfolio-panel: rgba(255, 255, 255, 0.05);
+    --portfolio-panel-strong: rgba(255, 255, 255, 0.08);
     --portfolio-border: rgba(255, 255, 255, 0.12);
-    --portfolio-text: #f5f7fb;
-    --portfolio-muted: #a9b1bf;
-    --portfolio-dim: #7d8794;
-    --portfolio-accent: #49d0b1;
+    --portfolio-border-strong: rgba(255, 255, 255, 0.2);
+    --portfolio-text: #ededee;
+    --portfolio-muted: #a3a3ac;
+    --portfolio-dim: #6f6f78;
+    --portfolio-accent: #7c5cff;
+    --portfolio-accent-2: #22d3ee;
     --portfolio-accent-warm: #f4b860;
-    --portfolio-radius: 8px;
-    --portfolio-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+    --portfolio-radius: 10px;
+    --portfolio-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    --portfolio-glow: 0 0 60px -12px rgba(124, 92, 255, 0.45);
+    --portfolio-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --portfolio-nav-h: 3.8rem;
 }
+
+/* ----------------------------------------------------------------------- */
+/* Base + animated background                                              */
+/* ----------------------------------------------------------------------- */
 
 html,
 body,
 .stApp {
-    background:
-        linear-gradient(180deg, rgba(73, 208, 177, 0.045), transparent 260px),
-        var(--portfolio-bg);
+    background: var(--portfolio-bg);
     color: var(--portfolio-text);
     font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+.stApp {
+    position: relative;
+    isolation: isolate;
+    overflow-x: clip;
+}
+
+.stApp::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 45%, transparent 100%);
+    animation: pf-grid-drift 40s linear infinite;
+}
+
+.stApp::after {
+    content: "";
+    position: fixed;
+    inset: -10%;
+    z-index: -3;
+    pointer-events: none;
+    background-image:
+        radial-gradient(38rem 30rem at 12% 8%, rgba(124, 92, 255, 0.32), transparent 60%),
+        radial-gradient(34rem 28rem at 88% 18%, rgba(34, 211, 238, 0.22), transparent 60%),
+        radial-gradient(30rem 26rem at 30% 92%, rgba(244, 184, 96, 0.1), transparent 60%);
+    filter: blur(20px);
+    animation: pf-blob-drift 24s ease-in-out infinite alternate;
+}
+
+@keyframes pf-grid-drift {
+    from {
+        background-position: 0 0, 0 0;
+    }
+    to {
+        background-position: 42px 42px, 42px 42px;
+    }
+}
+
+@keyframes pf-blob-drift {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translate3d(2%, -3%, 0) scale(1.06);
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(-3%, 2%, 0) scale(1.02);
+        opacity: 0.85;
+    }
+}
+
+[data-testid="stAppViewContainer"] {
+    position: relative;
+    z-index: 1;
+}
+
 .block-container {
     max-width: 1120px;
-    padding-top: 2.75rem;
+    padding-top: 1.75rem;
     padding-bottom: 5rem;
 }
 
-[data-testid="stSidebar"] {
-    background: rgba(10, 13, 18, 0.98);
-    border-right: 1px solid var(--portfolio-border);
+/* ----------------------------------------------------------------------- */
+/* Top navigation                                                          */
+/* ----------------------------------------------------------------------- */
+
+[data-testid="stSidebar"],
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="stDecoration"] {
+    display: none !important;
 }
 
-[data-testid="stSidebarNav"] a {
-    border-radius: var(--portfolio-radius);
+[data-testid="stAppHeader"] {
+    background: rgba(10, 10, 11, 0.86) !important;
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid var(--portfolio-border-strong);
+    box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.7);
+    height: var(--portfolio-nav-h);
+    z-index: 999;
 }
+
+[data-testid="stTopNavSection"] {
+    gap: 0.25rem;
+}
+
+[data-testid="stTopNavLink"] {
+    font-family: var(--portfolio-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.01em;
+    color: var(--portfolio-muted) !important;
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    transition:
+        color 160ms ease,
+        background 160ms ease;
+}
+
+[data-testid="stTopNavLink"]:hover {
+    color: var(--portfolio-text) !important;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+[data-testid="stTopNavLink"][aria-selected="true"],
+[data-testid="stTopNavLink"][aria-current="page"] {
+    color: var(--portfolio-text) !important;
+    background: rgba(124, 92, 255, 0.16);
+    box-shadow: inset 0 0 0 1px rgba(124, 92, 255, 0.4);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Identity strip (below the nav, present on every page)                   */
+/* ----------------------------------------------------------------------- */
+
+.st-key-identity_bar {
+    position: sticky;
+    top: calc(var(--portfolio-nav-h) + 0.6rem);
+    z-index: 50;
+    background:
+        linear-gradient(120deg, rgba(124, 92, 255, 0.14), rgba(34, 211, 238, 0.08) 60%, transparent),
+        rgba(13, 13, 15, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--portfolio-border);
+    border-radius: var(--portfolio-radius);
+    box-shadow: var(--portfolio-shadow);
+    padding: 0.7rem 1rem;
+    margin: 1.1rem 0 1.75rem;
+}
+
+.st-key-identity_bar img {
+    border-radius: 999px;
+    border: 1.5px solid var(--portfolio-border-strong);
+}
+
+.pf-identity-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.2;
+}
+
+.st-key-identity_bar .stCaptionContainer {
+    line-height: 1.2;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Typography                                                              */
+/* ----------------------------------------------------------------------- */
 
 h1,
 h2,
@@ -50,6 +198,10 @@ label {
 h1 {
     line-height: 1.04;
     margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, #ffffff 0%, #c9c9d1 55%, var(--portfolio-accent) 120%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 h2,
@@ -61,6 +213,14 @@ p,
 li {
     color: var(--portfolio-muted);
     line-height: 1.68;
+}
+
+[data-testid="stCaptionContainer"] {
+    font-family: var(--portfolio-mono);
+    letter-spacing: 0.02em;
+    color: var(--portfolio-accent-2) !important;
+    text-transform: uppercase;
+    font-size: 0.72rem !important;
 }
 
 section[data-testid="stMain"] a {
@@ -81,20 +241,34 @@ a[role="button"]:hover {
     transform: translateY(-1px);
 }
 
-.st-key-profile_card,
+/* ----------------------------------------------------------------------- */
+/* Cards                                                                    */
+/* ----------------------------------------------------------------------- */
+
 .st-key-about_card,
 .st-key-skills_card,
 .st-key-certifications_card,
+.st-key-education_intro,
 .st-key-experience_intro,
 .st-key-projects_intro,
+.st-key-featured_projects_intro,
+.st-key-testimonials_intro,
 .st-key-writing_intro,
 .st-key-uses_intro,
 .st-key-archive_intro,
+.st-key-contact_intro,
+.st-key-contact_info_card,
+.st-key-contact_form_card,
+.st-key-cta_banner,
 .st-key-archive_card,
+.st-key-hero_portrait,
 div[class*="st-key-experience_card_"],
 div[class*="st-key-project_card_"],
+div[class*="st-key-featured_project_card_"],
 div[class*="st-key-writing_card_"],
-div[class*="st-key-uses_card_"] {
+div[class*="st-key-uses_card_"],
+div[class*="st-key-education_item_"],
+div[class*="st-key-testimonials_card_"] {
     background: var(--portfolio-panel);
     border: 1px solid var(--portfolio-border);
     border-radius: var(--portfolio-radius);
@@ -103,28 +277,23 @@ div[class*="st-key-uses_card_"] {
     margin-bottom: 1rem;
 }
 
-.st-key-profile_card {
-    position: sticky;
-    top: 1rem;
-}
-
-.st-key-profile_card img {
+.st-key-hero_portrait img {
     border-radius: var(--portfolio-radius);
     border: 1px solid var(--portfolio-border);
-}
-
-.st-key-profile_card [data-testid="stVerticalBlock"] {
-    gap: 0.55rem;
 }
 
 .st-key-about_card,
 .st-key-skills_card,
 .st-key-certifications_card,
+.st-key-education_intro,
 .st-key-experience_intro,
 .st-key-projects_intro,
+.st-key-featured_projects_intro,
+.st-key-testimonials_intro,
 .st-key-writing_intro,
 .st-key-uses_intro,
-.st-key-archive_intro {
+.st-key-archive_intro,
+.st-key-contact_intro {
     background: var(--portfolio-panel-strong);
 }
 
@@ -133,8 +302,11 @@ div[class*="st-key-uses_card_"] {
 .st-key-certifications_card,
 div[class*="st-key-experience_card_"],
 div[class*="st-key-project_card_"],
+div[class*="st-key-featured_project_card_"],
 div[class*="st-key-writing_card_"],
-div[class*="st-key-uses_card_"] {
+div[class*="st-key-uses_card_"],
+div[class*="st-key-education_item_"],
+div[class*="st-key-testimonials_card_"] {
     transition:
         border-color 180ms ease,
         transform 180ms ease,
@@ -146,19 +318,139 @@ div[class*="st-key-uses_card_"] {
 .st-key-certifications_card:hover,
 div[class*="st-key-experience_card_"]:hover,
 div[class*="st-key-project_card_"]:hover,
+div[class*="st-key-featured_project_card_"]:hover,
 div[class*="st-key-writing_card_"]:hover,
-div[class*="st-key-uses_card_"]:hover {
-    border-color: rgba(73, 208, 177, 0.42);
+div[class*="st-key-uses_card_"]:hover,
+div[class*="st-key-education_item_"]:hover,
+div[class*="st-key-testimonials_card_"]:hover {
+    border-color: rgba(124, 92, 255, 0.45);
     background: rgba(255, 255, 255, 0.075);
     transform: translateY(-2px);
+    box-shadow: var(--portfolio-shadow), var(--portfolio-glow);
 }
 
 div[class*="st-key-experience_tags_"],
 div[class*="st-key-project_tags_"],
+div[class*="st-key-featured_project_tags_"],
 .st-key-primary_skills,
 .st-key-secondary_skills {
     margin-top: 0.6rem;
 }
+
+/* CTA banner */
+.st-key-cta_banner {
+    background: linear-gradient(135deg, rgba(124, 92, 255, 0.18), rgba(34, 211, 238, 0.12));
+    border: 1px solid rgba(124, 92, 255, 0.4);
+}
+
+.st-key-cta_banner [data-testid="stPageLink"] {
+    justify-content: center;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Social icon row                                                          */
+/* ----------------------------------------------------------------------- */
+
+.pf-social-row {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin: 0.35rem 0;
+    min-width: -webkit-min-content;
+    min-width: min-content;
+}
+
+.st-key-hero_social_row .pf-social-row,
+.st-key-contact_social_row .pf-social-row,
+.st-key-identity_social_row .pf-social-row {
+    justify-content: flex-start;
+}
+
+.pf-social-btn {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    border: 1px solid var(--portfolio-border);
+    background: var(--portfolio-panel);
+    transition:
+        border-color 180ms ease,
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.pf-social-btn:hover {
+    border-color: var(--portfolio-accent);
+    box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.18);
+    transform: translateY(-2px);
+}
+
+/* ----------------------------------------------------------------------- */
+/* Testimonials                                                            */
+/* ----------------------------------------------------------------------- */
+
+div[class*="st-key-testimonials_card_"] {
+    position: relative;
+}
+
+.pf-quote-mark {
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--portfolio-accent);
+    opacity: 0.6;
+    margin-bottom: -0.5rem;
+    font-family: Georgia, serif;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Marquee (scrolling tech stack)                                          */
+/* ----------------------------------------------------------------------- */
+
+.pf-marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.pf-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 0.6rem;
+    animation: pf-marquee-scroll 22s linear infinite;
+}
+
+.pf-marquee:hover .pf-marquee-track {
+    animation-play-state: paused;
+}
+
+.pf-marquee-chip {
+    flex: 0 0 auto;
+    font-family: var(--portfolio-mono);
+    font-size: 0.8rem;
+    color: var(--portfolio-text);
+    background: var(--portfolio-panel);
+    border: 1px solid var(--portfolio-border);
+    border-radius: 999px;
+    padding: 0.45rem 1rem;
+    white-space: nowrap;
+}
+
+@keyframes pf-marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ----------------------------------------------------------------------- */
+/* Misc components                                                          */
+/* ----------------------------------------------------------------------- */
 
 [data-testid="stMetric"] {
     background: var(--portfolio-panel);
@@ -168,7 +460,7 @@ div[class*="st-key-project_tags_"],
 }
 
 [data-testid="stMetricValue"] {
-    color: var(--portfolio-accent);
+    color: var(--portfolio-accent-2);
 }
 
 [data-testid="stDataFrame"] {
@@ -176,30 +468,28 @@ div[class*="st-key-project_tags_"],
     overflow: hidden;
 }
 
+.stButton > button,
+a[role="button"] {
+    min-height: 3rem;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Responsive                                                               */
+/* ----------------------------------------------------------------------- */
+
 @media (max-width: 900px) {
     .block-container {
         padding-left: 1rem;
         padding-right: 1rem;
         padding-top: 1.5rem;
     }
-
-    .st-key-profile_card {
-        position: static;
-    }
-}
-
-.st-key-profile_card img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.stButton > button,
-a[role="button"] {
-    min-height: 3rem;
 }
 
 @media (max-width: 760px) {
+    :root {
+        --portfolio-nav-h: 3.4rem;
+    }
+
     .block-container {
         padding-left: 1rem;
         padding-right: 1rem;
@@ -207,28 +497,51 @@ a[role="button"] {
         padding-bottom: 3rem;
     }
 
-    .st-key-profile_card,
+    .st-key-identity_bar [data-testid="stHorizontalBlock"] {
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+    }
+
+    .pf-social-row {
+        justify-content: center !important;
+    }
+
     .st-key-about_card,
     .st-key-skills_card,
     .st-key-certifications_card,
+    .st-key-education_intro,
     .st-key-experience_intro,
     .st-key-projects_intro,
+    .st-key-featured_projects_intro,
+    .st-key-testimonials_intro,
     .st-key-writing_intro,
     .st-key-uses_intro,
     .st-key-archive_intro,
+    .st-key-contact_intro,
+    .st-key-contact_info_card,
+    .st-key-contact_form_card,
+    .st-key-cta_banner,
     div[class*="st-key-experience_card_"],
     div[class*="st-key-project_card_"],
+    div[class*="st-key-featured_project_card_"],
     div[class*="st-key-writing_card_"],
     div[class*="st-key-uses_card_"],
+    div[class*="st-key-education_item_"],
+    div[class*="st-key-testimonials_card_"],
     div[class*="st-key-archive_card"] {
         padding: 1rem;
     }
 
     div[class*="st-key-experience_tags_"],
     div[class*="st-key-project_tags_"],
+    div[class*="st-key-featured_project_tags_"],
     .st-key-primary_skills,
     .st-key-secondary_skills {
         margin-top: 0.35rem;
+    }
+
+    .st-key-cta_banner [data-testid="stHorizontalBlock"] {
+        flex-direction: column;
     }
 
     .st-badge {
