@@ -56,9 +56,9 @@ body,
     z-index: -3;
     pointer-events: none;
     background-image:
-        radial-gradient(38rem 30rem at 12% 8%, rgba(124, 92, 255, 0.32), transparent 60%),
-        radial-gradient(34rem 28rem at 88% 18%, rgba(34, 211, 238, 0.22), transparent 60%),
-        radial-gradient(30rem 26rem at 30% 92%, rgba(244, 184, 96, 0.1), transparent 60%);
+        radial-gradient(38rem 30rem at 12% 8%, rgba(124, 92, 255, 0.48), transparent 62%),
+        radial-gradient(34rem 28rem at 88% 18%, rgba(34, 211, 238, 0.36), transparent 62%),
+        radial-gradient(30rem 26rem at 30% 92%, rgba(244, 184, 96, 0.16), transparent 62%);
     filter: blur(20px);
     animation: pf-blob-drift 24s ease-in-out infinite alternate;
 }
@@ -103,12 +103,11 @@ body,
 /* ----------------------------------------------------------------------- */
 
 [data-testid="stSidebar"],
-[data-testid="stSidebarCollapsedControl"],
-[data-testid="stDecoration"] {
+[data-testid="stExpandSidebarButton"] {
     display: none !important;
 }
 
-[data-testid="stAppHeader"] {
+[data-testid="stHeader"] {
     background: rgba(10, 10, 11, 0.86) !important;
     backdrop-filter: blur(16px) saturate(140%);
     -webkit-backdrop-filter: blur(16px) saturate(140%);
