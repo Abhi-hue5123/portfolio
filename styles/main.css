@@ -188,6 +188,55 @@ div[class*="st-key-project_tags_"],
     }
 }
 
+.st-key-profile_card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.stButton > button,
+a[role="button"] {
+    min-height: 3rem;
+}
+
+@media (max-width: 760px) {
+    .block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 1.5rem;
+        padding-bottom: 3rem;
+    }
+
+    .st-key-profile_card,
+    .st-key-about_card,
+    .st-key-skills_card,
+    .st-key-certifications_card,
+    .st-key-experience_intro,
+    .st-key-projects_intro,
+    .st-key-writing_intro,
+    .st-key-uses_intro,
+    .st-key-archive_intro,
+    div[class*="st-key-experience_card_"],
+    div[class*="st-key-project_card_"],
+    div[class*="st-key-writing_card_"],
+    div[class*="st-key-uses_card_"],
+    div[class*="st-key-archive_card"] {
+        padding: 1rem;
+    }
+
+    div[class*="st-key-experience_tags_"],
+    div[class*="st-key-project_tags_"],
+    .st-key-primary_skills,
+    .st-key-secondary_skills {
+        margin-top: 0.35rem;
+    }
+
+    .st-badge {
+        display: inline-flex !important;
+        margin: 0.15rem 0.35rem 0.35rem 0 !important;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

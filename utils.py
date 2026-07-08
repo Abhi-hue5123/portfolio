@@ -73,9 +73,10 @@ def render_pills(items: list[str], key: str, variant: str = "secondary") -> None
         return
 
     with st.container(key=key):
-        cols = st.columns(min(len(items), 4), gap="small")
+        max_cols = min(max(1, len(items)), 4)
+        cols = st.columns(max_cols, gap="small")
         for index, item in enumerate(items):
-            with cols[index % len(cols)]:
+            with cols[index % max_cols]:
                 badge_type = "blue" if variant == "primary" else "gray"
                 st.badge(clean_text(item), color=badge_type)
 
