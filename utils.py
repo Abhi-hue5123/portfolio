@@ -94,22 +94,22 @@ def render_section_card(label: str, title: str, description: str, key: str):
 
 _ICON_COLOR = "#ededee"
 
+_SVG_NS = 'xmlns="http://www.w3.org/2000/svg"'
+
 _SOCIAL_ICONS = {
     "email": (
-        '<svg viewBox="0 0 24 24" width="18" height="18" style="display:block;fill:none;'
-        f'stroke:{_ICON_COLOR};stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round">'
+        f'<svg {_SVG_NS} viewBox="0 0 24 24" width="18" height="18" fill="none" '
+        f'stroke="{_ICON_COLOR}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
         '<rect x="2.5" y="4.5" width="19" height="15" rx="2.2"/><path d="M3 6.5l9 6.2 9-6.2"/></svg>'
     ),
     "linkedin": (
-        '<svg viewBox="0 0 24 24" width="18" height="18" style="display:block;'
-        f'fill:{_ICON_COLOR}">'
+        f'<svg {_SVG_NS} viewBox="0 0 24 24" width="18" height="18" fill="{_ICON_COLOR}">'
         '<path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.64h.05c.53-.98 '
         "1.83-2.02 3.77-2.02 4.03 0 4.78 2.55 4.78 5.86V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 "
         '0-2.16 1.44-2.16 2.96V21H9z"/></svg>'
     ),
     "github": (
-        '<svg viewBox="0 0 24 24" width="18" height="18" style="display:block;'
-        f'fill:{_ICON_COLOR}">'
+        f'<svg {_SVG_NS} viewBox="0 0 24 24" width="18" height="18" fill="{_ICON_COLOR}">'
         "<path d=\"M12 2C6.48 2 2 6.58 2 12.2c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.49 "
         "0-.24-.01-1.03-.01-1.87-2.78.62-3.37-1.21-3.37-1.21-.46-1.19-1.11-1.51-1.11-1.51-.9-.63.07-.62.07-.62 "
         "1 .07 1.53 1.05 1.53 1.05.89 1.55 2.34 1.1 2.91.84.09-.66.35-1.1.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 "
